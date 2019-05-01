@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="whiteTextColor">#FAF8FC</color>
+    <color name="lightTextColor">#E0DEDB</color>
+    <color name="hintColor">#E0DEDB</color>
+    <color name="darkTextColor">#252020</color>
+    <color name="loginTextField">#3BCFCDCD</color>
+    <color name="borderOpacityColor">#A1FFFFFF</color>
+    <color name="formsColor">#3D4FB4</color>
+    <color name="colorPrimaryDark">#1F687E</color>
+    <color name="colorPrimary">#B7FFFF</color>
+    <color name="colorAccent">#EEFF0000</color>
+    <color name="statusBar">#2BC9C3</color>
+    <color name="cropBar">#42A1BD</color>
+
+</resources>

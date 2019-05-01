@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ChangeInfoActivity"
+    android:background="@drawable/bground">
+
+    <android.support.design.widget.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="25dp">
+
+        <include
+            android:id="@+id/change_info_toolbar"
+            layout="@layout/app_bar_layout" />
+    </android.support.design.widget.AppBarLayout>
+
+    <TextView
+        android:id="@+id/textView_change"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="40sp"
+        android:textColor="@color/lightTextColor"
+        android:layout_marginTop="100dp"
+        android:layout_centerHorizontal="true"
+        android:fontFamily="sans-serif-black"
+        android:text="Изменить" />
+
+    <EditText
+        android:id="@+id/change_name"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="200dp"
+        android:layout_centerHorizontal="true"
+        android:backgroundTint="@color/hintColor"
+        android:ems="10"
+        android:hint="Имя"
+        android:padding="10dp"
+        android:textColor="@color/lightTextColor"
+        android:textColorHint="@color/hintColor"
+        android:textSize="20dp"  />
+
+    <EditText
+        android:id="@+id/change_status"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:layout_below="@id/change_name"
+        android:layout_centerHorizontal="true"
+        android:backgroundTint="@color/hintColor"
+        android:ems="10"
+        android:hint="Статус"
+        android:padding="10dp"
+        android:textColor="@color/lightTextColor"
+        android:textColorHint="@color/hintColor"
+        android:textSize="20dp" />
+
+    <Button
+        android:id="@+id/save_info_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/change_status"
+        android:layout_marginLeft="230dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/settings_button"
+        android:padding="10dp"
+        android:textColor="@color/lightTextColor"
+        android:text="Сохранить" />
+
+
+
+</RelativeLayout>
