@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.chatapp">
+    package="com.example.chatapp"
+    >
 
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
@@ -12,7 +13,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".UsersActivity"></activity>
+        <activity android:name=".UsersActivity"
+            android:parentActivityName=".MainActivity"></activity>
         <activity
             android:name="com.theartofdev.edmodo.cropper.CropImageActivity"
             android:theme="@style/AppThemeTwo" />
@@ -33,7 +35,8 @@
         </activity>
         <activity
             android:name=".RegisterActivity"
-            android:windowSoftInputMode="adjustResize"
+            android:windowSoftInputMode="stateHidden|adjustPan|adjustNothing"
+            android:fitsSystemWindows="true"
             android:parentActivityName=".StartActivity">
             <intent-filter>
                 <action android:name="com.example.chatapp.RegisterActivity" />

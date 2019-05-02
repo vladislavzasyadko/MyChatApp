@@ -8,6 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -52,6 +53,7 @@ public class RegisterActivity extends AppCompatActivity {
             window.addFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
             //window.addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
         }
+        RegisterActivity.this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
         setContentView(R.layout.activity_register);
 
         reg_toolbar = (Toolbar) findViewById(R.id.reg_toolbar);
@@ -77,6 +79,16 @@ public class RegisterActivity extends AppCompatActivity {
         new_login = findViewById(R.id.reg_name_field);
         password = findViewById(R.id.password_field);
         passwordApproval = findViewById(R.id.password_field2);
+
+        password.setOnTouchListener(new View.OnTouchListener() {
+
+            public boolean onTouch(View v, MotionEvent event) {
+                password.requestLayout();
+                RegisterActivity.this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_UNSPECIFIED);
+
+                return false;
+            }
+        });
 
 
 
