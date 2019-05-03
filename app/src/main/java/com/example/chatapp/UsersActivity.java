@@ -11,6 +11,8 @@ import android.support.v7.widget.Toolbar;
 import android.view.Window;
 import android.view.WindowManager;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -25,6 +27,7 @@ public class UsersActivity extends AppCompatActivity {
     private RecyclerView users_list;
 
     private DatabaseReference reference;
+    private String currentUser;
 
     DataAdapter dataAdapter;
 
@@ -47,6 +50,8 @@ public class UsersActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         reference = FirebaseDatabase.getInstance().getReference().child("Users");
+
+        currentUser = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
 
         users_list = findViewById(R.id.user_list);
@@ -73,10 +78,15 @@ public class UsersActivity extends AppCompatActivity {
         reference.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-                Users user = dataSnapshot.getValue(Users.class);
-                users.add(user);
                 String user_id = dataSnapshot.getRef().getKey();
-                user_ids.add(user_id);
+                Users user = dataSnapshot.getValue(Users.class);
+                if(!user_id.equals(currentUser)) {
+                    users.add(user);
+                    user_ids.add(user_id);
+                }
+
+                //WE DON'T WANT TO SEE OURSELVES IN USER LIST TO SEND FRIEND REQUEST
+
                 //System.out.println("USER_ID" + user_id);
 
                 dataAdapter.notifyDataSetChanged();

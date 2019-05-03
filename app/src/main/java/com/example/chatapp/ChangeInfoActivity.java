@@ -23,6 +23,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.HashMap;
+import java.util.Map;
 
 public class ChangeInfoActivity extends AppCompatActivity {
 
@@ -84,11 +85,12 @@ public class ChangeInfoActivity extends AppCompatActivity {
                     Toast.makeText(ChangeInfoActivity.this, "all fields are required", Toast.LENGTH_SHORT).show();
                 }
                 else{
-                    HashMap<String, String> changeMap = new HashMap<>();
+
+                    Map changeMap = new HashMap<>();
                     changeMap.put("status", status);
                     changeMap.put("username", name);
 
-                    reference.setValue(changeMap).addOnCompleteListener(new OnCompleteListener<Void>() {
+                    reference.updateChildren(changeMap).addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {
                             if(task.isComplete()){

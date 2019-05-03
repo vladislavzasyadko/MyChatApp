@@ -27,6 +27,9 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
 
+import java.text.DateFormat;
+import java.util.Date;
+
 public class ProfileActivity extends AppCompatActivity {
 
     Toolbar profile_toolbar;
@@ -35,10 +38,13 @@ public class ProfileActivity extends AppCompatActivity {
     TextView profile_username;
     TextView profile_status;
     Button send_request;
-
+    //FOR USER DATA LOADING
     DatabaseReference reference;
-
+    //FOR FRIEND REQUEST STORING AND LOADING
     DatabaseReference friendsRequestreference;
+    //FOR FRIEND FEATURE
+    DatabaseReference friendDatabase;
+
     FirebaseUser currentUser;
 
     ProgressDialog progress;
@@ -78,6 +84,8 @@ public class ProfileActivity extends AppCompatActivity {
 
         reference = FirebaseDatabase.getInstance().getReference().child("Users").child(user_id);
         friendsRequestreference = FirebaseDatabase.getInstance().getReference().child("Friend_Requests");
+        friendDatabase = FirebaseDatabase.getInstance().getReference().child("Friends");
+
         currentUser = FirebaseAuth.getInstance().getCurrentUser();
 
         reference.addValueEventListener(new ValueEventListener() {
@@ -114,9 +122,31 @@ public class ProfileActivity extends AppCompatActivity {
                                 send_request.setText("CANCEL FRIEND REQUEST");
 
                             }
+                            progress.dismiss();
+                        }else {
+
+                            friendDatabase.child(currentUser.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
+                                @Override
+                                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                                    if(dataSnapshot.hasChild(user_id)){
+
+                                        current_state = "friends";
+                                        send_request.setText("UNFRIEND");
+
+                                    }
+
+                                }
+
+                                @Override
+                                public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                                }
+                            });
+                            progress.dismiss();
                         }
 
-                        progress.dismiss();
+
 
                     }
 
@@ -197,12 +227,90 @@ public class ProfileActivity extends AppCompatActivity {
                                 });
                             }
                             else{
-                                Toast.makeText(ProfileActivity.this, "Failed Sending Request", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(ProfileActivity.this, "Failed Cancelling Request", Toast.LENGTH_SHORT).show();
                             }
 
                         }
                     });
                 }
+
+                //-------ACCEPT FRIEND REQUEST-------
+                if(current_state.equals("req_received")){
+
+                    final String currentDate = DateFormat.getDateTimeInstance().format(new Date());
+
+                    friendDatabase.child(currentUser.getUid()).child(user_id).setValue(currentDate)
+                            .addOnSuccessListener(new OnSuccessListener<Void>() {
+                        @Override
+                        public void onSuccess(Void aVoid) {
+
+                            friendDatabase.child(user_id).child(currentUser.getUid()).setValue(currentDate)
+                                    .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                @Override
+                                public void onSuccess(Void aVoid) {
+
+                                    //------DELETING FRIEND REQUEST AFTER ACCEPTING------
+                                    friendsRequestreference.child(currentUser.getUid()).child(user_id).
+                                            removeValue().addOnCompleteListener(new OnCompleteListener<Void>() {
+                                        @Override
+                                        public void onComplete(@NonNull Task<Void> task) {
+
+                                            if(task.isSuccessful()){
+
+                                                friendsRequestreference.child(user_id).child(currentUser.getUid())
+                                                        .removeValue().addOnSuccessListener(new OnSuccessListener<Void>() {
+                                                    @Override
+                                                    public void onSuccess(Void aVoid) {
+
+                                                        send_request.setEnabled(true);
+                                                        current_state = "friends";
+                                                        send_request.setText("UNFRIEND");
+
+                                                    }
+                                                });
+                                            }
+                                            else{
+                                                Toast.makeText(ProfileActivity.this, "Failed Accept", Toast.LENGTH_SHORT).show();
+                                            }
+
+                                        }
+                                    });
+                                    //------------------------------------
+
+                                }
+                            });
+
+                        }
+                    });
+                }
+
+                //--------------UNFRIEND USER----------
+
+                //-------ACCEPT FRIEND REQUEST-------
+                if(current_state.equals("friends")){
+
+                    friendDatabase.child(currentUser.getUid()).child(user_id).removeValue()
+                            .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                @Override
+                                public void onSuccess(Void aVoid) {
+
+                                    friendDatabase.child(user_id).child(currentUser.getUid()).removeValue()
+                                            .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                                @Override
+                                                public void onSuccess(Void aVoid) {
+
+                                                    send_request.setEnabled(true);
+                                                    current_state = "not_friends";
+                                                    send_request.setText("SEND FRIEND REQUEST");
+
+                                                }
+                                            });
+
+                                }
+                            });
+                }
+                //-----------------
+
             }
         });
 

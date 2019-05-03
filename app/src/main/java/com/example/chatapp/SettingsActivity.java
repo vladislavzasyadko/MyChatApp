@@ -95,6 +95,7 @@ public class SettingsActivity extends AppCompatActivity {
         storageReference = FirebaseStorage.getInstance().getReference();
 
         reference = FirebaseDatabase.getInstance().getReference().child("Users").child(user_id);
+        reference.keepSynced(true);
 
         reference.addValueEventListener(new ValueEventListener() {
             @Override
