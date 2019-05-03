@@ -3,7 +3,7 @@ package com.example.chatapp;
 
 public class Users {
 
-    String image;
+    String thumb_image;
     String status;
     String username;
 
@@ -11,18 +11,18 @@ public class Users {
 
     }
 
-    public Users(String username, String image, String status){
+    public Users(String username, String thumb_image, String status){
         this.username = username;
         this.status = status;
-        this.image = image;
+        this.thumb_image = thumb_image;
     }
 
     public void setName(String username){
         this.username = username;
     }
 
-    public void setImage(String image){
-        this.image = image;
+    public void setImage(String thumb_image){
+        this.thumb_image = thumb_image;
     }
 
     public void setStatus(String status){
@@ -34,7 +34,7 @@ public class Users {
     }
 
     public String getImage(){
-        return image;
+        return thumb_image;
     }
 
     public String getStatus(){

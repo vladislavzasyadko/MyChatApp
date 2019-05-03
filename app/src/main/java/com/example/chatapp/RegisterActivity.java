@@ -140,6 +140,7 @@ public class RegisterActivity extends AppCompatActivity {
                             userMap.put("status", "I'm using this ChatApp!");
                             userMap.put("image", "default");
                             userMap.put("thumb_image", "default");
+                            userMap.put("id",user_id);
 
                             reference.setValue(userMap).addOnCompleteListener(new OnCompleteListener<Void>() {
                                 @Override

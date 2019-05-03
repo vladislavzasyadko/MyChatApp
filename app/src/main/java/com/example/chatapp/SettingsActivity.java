@@ -2,6 +2,7 @@ package com.example.chatapp;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Build;
 import android.preference.PreferenceManager;
@@ -37,9 +38,14 @@ import com.theartofdev.edmodo.cropper.CropImageView;
 
 import org.w3c.dom.Text;
 
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Random;
 
 import de.hdodenhof.circleimageview.CircleImageView;
+import id.zelory.compressor.Compressor;
 
 public class SettingsActivity extends AppCompatActivity {
 
@@ -101,9 +107,7 @@ public class SettingsActivity extends AppCompatActivity {
 
                 display_name.setText(name);
                 status_field.setText(status);
-                if(!image.equals("default")) {
-                    Picasso.with(SettingsActivity.this).load(image).into(profilePic);
-                }
+                Picasso.with(SettingsActivity.this).load(image).placeholder(R.mipmap.user2).into(profilePic);
             }
 
             @Override
@@ -169,28 +173,63 @@ public class SettingsActivity extends AppCompatActivity {
                 image_load_progress.show();
 
                 Uri resultUri = result.getUri();
+
+                File thumb_file = new File(resultUri.getPath());
+
                 String currentUid = currentUser.getUid();
 
+                Bitmap thumb_bitmap = new Compressor(this)
+                        .setMaxHeight(200)
+                        .setMaxWidth(200)
+                        .compressToBitmap(thumb_file);
+
+                ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                thumb_bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+                final byte[] thumb_byte = baos.toByteArray();
+
                 final StorageReference filepath = storageReference.child("Profile_Images").child(currentUid + ".jpg");
+                final StorageReference thumb_filepath = storageReference.child("Profile_Images").child("thumbs").child(currentUid + ".jpg");
                 filepath.putFile(resultUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                     @Override
-                    public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                    public void onSuccess(final UploadTask.TaskSnapshot taskSnapshot) {
                         filepath.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                             @Override
                             public void onSuccess(Uri uri) {
 
-                                String download_link = uri.toString();
+                                final String download_link = uri.toString();
 
-                                reference.child("image").setValue(download_link).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                UploadTask uploadTask = thumb_filepath.putBytes(thumb_byte);
+                                uploadTask.addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                                     @Override
-                                    public void onComplete(@NonNull Task<Void> task) {
-                                        if(task.isSuccessful()){
-                                            image_load_progress.dismiss();
-                                            Toast.makeText(SettingsActivity.this, "Successfully Uploaded!", Toast.LENGTH_SHORT).show();
+                                    public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                                        thumb_filepath.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                                            @Override
+                                            public void onSuccess(Uri uri) {
+                                                String thumb_download_url = uri.toString();
 
-                                        }
+                                                Map updateMap = new HashMap<>();
+                                                updateMap.put("image", download_link);
+                                                updateMap.put("thumb_image", thumb_download_url);
+
+
+                                                reference.updateChildren(updateMap).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                                    @Override
+                                                    public void onComplete(@NonNull Task<Void> task) {
+                                                        if(task.isSuccessful()){
+                                                            image_load_progress.dismiss();
+                                                            Toast.makeText(SettingsActivity.this, "Successfully Uploaded!", Toast.LENGTH_SHORT).show();
+
+                                                        }
+                                                    }
+                                                });
+
+
+                                            }
+                                        });
                                     }
                                 });
+
+
 
                             }
                         });

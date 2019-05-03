@@ -29,6 +29,7 @@ public class UsersActivity extends AppCompatActivity {
     DataAdapter dataAdapter;
 
     ArrayList<Users> users = new ArrayList<>();
+    ArrayList<String> user_ids = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,7 +56,7 @@ public class UsersActivity extends AppCompatActivity {
 
         users_list.setLayoutManager(new LinearLayoutManager(this));
 
-        dataAdapter = new DataAdapter( this, users);
+        dataAdapter = new DataAdapter( this, users, user_ids);
 
         users_list.setAdapter(dataAdapter);
 
@@ -64,6 +65,7 @@ public class UsersActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
+        if(users.size() == 0)
         loadUsers();
     }
 
@@ -73,6 +75,10 @@ public class UsersActivity extends AppCompatActivity {
             public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
                 Users user = dataSnapshot.getValue(Users.class);
                 users.add(user);
+                String user_id = dataSnapshot.getRef().getKey();
+                user_ids.add(user_id);
+                //System.out.println("USER_ID" + user_id);
+
                 dataAdapter.notifyDataSetChanged();
                 //users_list.smoothScrollToPosition(users.size());//промотка вниз списка пользователей
             }
