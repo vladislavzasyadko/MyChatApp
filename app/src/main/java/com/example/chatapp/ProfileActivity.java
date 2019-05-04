@@ -239,12 +239,12 @@ public class ProfileActivity extends AppCompatActivity {
 
                     final String currentDate = DateFormat.getDateTimeInstance().format(new Date());
 
-                    friendDatabase.child(currentUser.getUid()).child(user_id).setValue(currentDate)
+                    friendDatabase.child(currentUser.getUid()).child(user_id).child("date").setValue(currentDate)
                             .addOnSuccessListener(new OnSuccessListener<Void>() {
                         @Override
                         public void onSuccess(Void aVoid) {
 
-                            friendDatabase.child(user_id).child(currentUser.getUid()).setValue(currentDate)
+                            friendDatabase.child(user_id).child(currentUser.getUid()).child("date").setValue(currentDate)
                                     .addOnSuccessListener(new OnSuccessListener<Void>() {
                                 @Override
                                 public void onSuccess(Void aVoid) {
@@ -286,7 +286,6 @@ public class ProfileActivity extends AppCompatActivity {
 
                 //--------------UNFRIEND USER----------
 
-                //-------ACCEPT FRIEND REQUEST-------
                 if(current_state.equals("friends")){
 
                     friendDatabase.child(currentUser.getUid()).child(user_id).removeValue()

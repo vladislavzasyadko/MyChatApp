@@ -58,9 +58,6 @@ public class UsersActivity extends AppCompatActivity {
         users_list.setHasFixedSize(true);
         users_list.setLayoutManager(new LinearLayoutManager(this));
 
-
-        users_list.setLayoutManager(new LinearLayoutManager(this));
-
         dataAdapter = new DataAdapter( this, users, user_ids);
 
         users_list.setAdapter(dataAdapter);

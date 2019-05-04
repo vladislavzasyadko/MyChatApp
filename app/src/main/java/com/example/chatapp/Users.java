@@ -17,7 +17,7 @@ public class Users {
         this.thumb_image = thumb_image;
     }
 
-    public void setName(String username){
+    public void setUsername(String username){
         this.username = username;
     }
 
@@ -29,7 +29,7 @@ public class Users {
         this.status = status;
     }
 
-    public String getName(){
+    public String getUsername(){
         return username;
     }
 

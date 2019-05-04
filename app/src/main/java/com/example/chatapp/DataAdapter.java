@@ -50,8 +50,11 @@ public class DataAdapter extends RecyclerView.Adapter<UsersViewHolder> {
         //reference = FirebaseDatabase.getInstance().getReference().child("Users");
         //assert currentUser != null;
         //String user_id = currentUser.getUid(i);
-
-        viewHolder.username.setText(user.getName());
+        if(user.getUsername().isEmpty()){
+            viewHolder.username.setText("Not Loaded");
+        }else {
+            viewHolder.username.setText(user.getUsername());
+        }
         viewHolder.status.setText(user.getStatus());
         if(!viewHolder.image.equals("default")) {
             Picasso.with(context).load(user.getImage()).placeholder(R.mipmap.user2).into(viewHolder.image);

@@ -2,6 +2,7 @@ package com.example.chatapp;
 
 import android.content.Intent;
 import android.os.Build;
+import android.support.annotation.NonNull;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
@@ -15,6 +16,11 @@ import android.view.WindowManager;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -24,6 +30,9 @@ public class MainActivity extends AppCompatActivity {
     private ViewPager viewPager;
     private SectionsPagerAdapter sectionsPagerAdapter;
     private TabLayout tabLayout;
+
+    private DatabaseReference onlineReference;
+    private FirebaseAuth onlineAuth;
 
 
     @Override
@@ -65,6 +74,24 @@ public class MainActivity extends AppCompatActivity {
         if( currentUser == null){
            sendToStart();
         }
+
+        onlineAuth = FirebaseAuth.getInstance();
+        onlineReference = FirebaseDatabase.getInstance().getReference().child("Users").child(onlineAuth.getCurrentUser().getUid());
+
+        onlineReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                onlineReference.child("online").onDisconnect().setValue(false);
+                onlineReference.child("online").setValue(true);
+                System.out.println("USER IS ONLINE USER IS ONLINE USER IS ONLINE");
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
     }
 
     private void sendToStart() {
