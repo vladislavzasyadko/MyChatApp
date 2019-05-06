@@ -4,7 +4,7 @@
     <string name="registration_textView">Регистрация</string>
     <string name="reg_email">Почта</string>
     <string name="reg_button">Зарегистрироваться</string>
-    <string name="log_out">Log Out</string>
+    <string name="log_out">Выйти</string>
     <string name="sign_in">Войти</string>
     <string name="sign_in_hint">Логин</string>
     <string name="welcome">Добро Пожаловать!</string>
@@ -13,6 +13,12 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="settings">Settings</string>
-    <string name="all_users">All Users</string>
+    <string name="settings">Настройки</string>
+    <string name="all_users">Все пользователи</string>
+    <string name="cancel_friend_req">ОТМЕНИТЬ ЗАЯВКУ В ДРУЗЬЯ</string>
+    <string name="accept_friend_req">ПРИНЯТЬ В ДРУЗЬЯ</string>
+    <string name="unfriend">УДАЛИТЬ ИЗ ДРУЗЕЙ</string>
+    <string name="send_friend_req">ОТПРАВИТЬ ЗАЯВКУ В ДРУЗЬЯ</string>
+    <string name="change_photo">Изменить фото</string>
+    <string name="change_status">изменить имя и статус</string>
 </resources>

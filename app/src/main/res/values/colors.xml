@@ -7,10 +7,15 @@
     <color name="loginTextField">#3BCFCDCD</color>
     <color name="borderOpacityColor">#A1FFFFFF</color>
     <color name="formsColor">#3D4FB4</color>
-    <color name="colorPrimaryDark">#1F687E</color>
-    <color name="colorPrimary">#B7FFFF</color>
+    <color name="colorPrimaryDark">#0A54A0</color>
+    <color name="colorPrimary">#176CD5</color>
     <color name="colorAccent">#EEFF0000</color>
     <color name="statusBar">#2BC9C3</color>
     <color name="cropBar">#42A1BD</color>
+    <color name="chatbground">#C9C1C1</color>
+    <color name="chatTextBar">#fefefe</color>
+    <color name="white">#fff</color>
+
+
 
 </resources>

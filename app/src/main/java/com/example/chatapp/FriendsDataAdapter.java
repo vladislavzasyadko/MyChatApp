@@ -34,6 +34,8 @@ public class FriendsDataAdapter extends RecyclerView.Adapter<FriendsViewHolder> 
     Context context;
     View view;
 
+    //private String user_name;
+
     public FriendsDataAdapter(Context context, ArrayList<Friends> friends, ArrayList<String> friends_ids) {
         this.friends = friends;
         this.friends_ids = friends_ids;
@@ -66,14 +68,16 @@ public class FriendsDataAdapter extends RecyclerView.Adapter<FriendsViewHolder> 
         friendUserData.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                String name = dataSnapshot.child("username").getValue().toString();
+                String user_name = dataSnapshot.child("username").getValue().toString();
                 //String image = dataSnapshot.child("image").getValue().toString();
                 //String status = dataSnapshot.child("status").getValue().toString();
                 String thumb_image = dataSnapshot.child("thumb_image").getValue().toString();
 
+
+                //TODO add this feature to final version
                 if(dataSnapshot.hasChild("online")){
-                    Boolean online_status = (boolean) dataSnapshot.child("online").getValue();
-                    if(online_status.equals(true)){
+                    boolean online_status = (boolean) dataSnapshot.child("online").getValue();
+                    if(online_status){
                         viewHolder.online.setVisibility(View.VISIBLE);
                         System.out.println("MANAMEJEFF MANAMEjEFF MANAMEFEJJ");
                     }
@@ -82,7 +86,7 @@ public class FriendsDataAdapter extends RecyclerView.Adapter<FriendsViewHolder> 
                     viewHolder.online.setVisibility(View.INVISIBLE);
                 }
 
-                viewHolder.username.setText(name);
+                viewHolder.username.setText(user_name);
                 Picasso.with(context).load(thumb_image).placeholder(R.mipmap.user2).into(viewHolder.image);
             }
 
@@ -111,18 +115,21 @@ public class FriendsDataAdapter extends RecyclerView.Adapter<FriendsViewHolder> 
 
                             Intent friendsProfile = new Intent(context, ProfileActivity.class);
                             friendsProfile.putExtra("user_id", friend_id);
+
                             context.startActivity(friendsProfile);
                         }
                         if(which == 1){
 
                             Intent chat = new Intent(context, ChatActivity.class);
                             chat.putExtra("user_id", friend_id);
+                            chat.putExtra("user_name", viewHolder.username.getText().toString());
                             context.startActivity(chat);
 
                         }
 
                     }
                 });
+                builder.show();
 
 
 

@@ -38,15 +38,10 @@ public class UsersActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_users);
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-            Window window = getWindow();
-            window.addFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
-            //window.addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
-        }
 
         user_toolbar = findViewById(R.id.users_toolbar);
         setSupportActionBar(user_toolbar);
-        getSupportActionBar().setTitle("Users List");
+        getSupportActionBar().setTitle("Пользователи");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         reference = FirebaseDatabase.getInstance().getReference().child("Users");

@@ -74,18 +74,13 @@ public class SettingsActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-            Window window = getWindow();
-            window.addFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
-            //window.addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
-        }
         setContentView(R.layout.activity_settings);
 
         setLayout();
 
         settings_toolbar = findViewById(R.id.settings_toolbar);
         setSupportActionBar(settings_toolbar);
-        getSupportActionBar().setTitle("Settings");
+        getSupportActionBar().setTitle("Настройки");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         currentUser = FirebaseAuth.getInstance().getCurrentUser();

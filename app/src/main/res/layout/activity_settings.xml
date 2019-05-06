@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".SettingsActivity"
-    android:background="@drawable/bground">
+    android:background="@color/colorPrimary">
 
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
@@ -53,7 +53,7 @@
         android:layout_width="145dp"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:text="change image"
+        android:text="@string/change_photo"
         android:layout_marginTop="80dp"
         android:padding="10dp"
         android:background="@drawable/settings_button"
@@ -65,7 +65,7 @@
         android:layout_width="145dp"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:text="change status"
+        android:text="@string/change_status"
         android:layout_marginTop="20dp"
         android:padding="10dp"
         android:background="@drawable/settings_button"

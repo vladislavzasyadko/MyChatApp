@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ProfileActivity"
-    android:background="@drawable/bground">
+    android:background="@color/colorPrimary">
 
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
@@ -58,6 +58,6 @@
         android:background="@drawable/settings_button"
         android:textColor="@color/lightTextColor"
         android:padding="10dp"
-        android:text="Send Friend Request" />
+        android:text="ОТПРАВИТЬ ЗАПРОС В ДРУЗЬЯ" />
 
 </RelativeLayout>

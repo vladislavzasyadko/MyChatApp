@@ -5,8 +5,7 @@
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/colorAccent</item>
-        <item name="android:statusBarColor">@drawable/bground</item>
+        <item name="android:statusBarColor">@color/colorPrimaryDark</item>
     </style>
 
     <style name="AppThemeTwo" parent="Theme.AppCompat.Light.DarkActionBar">
@@ -18,8 +17,15 @@
     </style>
 
     <style name="MainActionBar.Popup" parent="ThemeOverlay.AppCompat.Light">
-        <item name="android:itemBackground">@drawable/bground</item>
+        <item name="android:itemBackground">@color/colorPrimary</item>
         <item name="android:textColor">@color/whiteTextColor</item>
     </style>
+
+    <style name="ChatButton" >
+        <item name="android:itemBackground">@color/chatTextBar</item>
+        <item name="android:textColor">@color/darkTextColor</item>
+    </style>
+
+
 
 </resources>

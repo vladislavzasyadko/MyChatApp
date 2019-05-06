@@ -48,17 +48,12 @@ public class RegisterActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-            Window window = getWindow();
-            window.addFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
-            //window.addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
-        }
         RegisterActivity.this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
         setContentView(R.layout.activity_register);
 
         reg_toolbar = (Toolbar) findViewById(R.id.reg_toolbar);
         setSupportActionBar(reg_toolbar);
-        getSupportActionBar().setTitle("Register");
+        getSupportActionBar().setTitle("Регистрация");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         reg_toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
@@ -80,7 +75,7 @@ public class RegisterActivity extends AppCompatActivity {
         password = findViewById(R.id.password_field);
         passwordApproval = findViewById(R.id.password_field2);
 
-        password.setOnTouchListener(new View.OnTouchListener() {
+        /*password.setOnTouchListener(new View.OnTouchListener() {
 
             public boolean onTouch(View v, MotionEvent event) {
                 password.requestLayout();
@@ -88,7 +83,7 @@ public class RegisterActivity extends AppCompatActivity {
 
                 return false;
             }
-        });
+        });*/
 
 
 

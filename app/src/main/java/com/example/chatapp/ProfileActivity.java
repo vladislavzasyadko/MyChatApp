@@ -54,11 +54,6 @@ public class ProfileActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-            Window window = getWindow();
-            window.addFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
-            //window.addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
-        }
         setContentView(R.layout.activity_profile);
 
         final String user_id = getIntent().getStringExtra("user_id");
@@ -72,7 +67,7 @@ public class ProfileActivity extends AppCompatActivity {
 
         profile_toolbar = findViewById(R.id.profile_toolbar);
         setSupportActionBar(profile_toolbar);
-        getSupportActionBar().setTitle("Profile");
+        getSupportActionBar().setTitle("Профиль");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         progress = new ProgressDialog(this);
@@ -113,13 +108,13 @@ public class ProfileActivity extends AppCompatActivity {
                             if(req_type.equals("received")){
 
                                 current_state = "req_received";
-                                send_request.setText("ACCEPT FRIEND REQUEST");
+                                send_request.setText(R.string.accept_friend_req);
 
                             }
                             else if(req_type.equals("sent")){
 
                                 current_state = "req_sent";
-                                send_request.setText("CANCEL FRIEND REQUEST");
+                                send_request.setText(R.string.cancel_friend_req);
 
                             }
                             progress.dismiss();
@@ -132,7 +127,7 @@ public class ProfileActivity extends AppCompatActivity {
                                     if(dataSnapshot.hasChild(user_id)){
 
                                         current_state = "friends";
-                                        send_request.setText("UNFRIEND");
+                                        send_request.setText(R.string.unfriend);
 
                                     }
 
@@ -190,7 +185,7 @@ public class ProfileActivity extends AppCompatActivity {
 
                                         send_request.setEnabled(true);
                                         current_state = "req_sent";
-                                        send_request.setText("CANCEL FRIEND REQUEST");
+                                        send_request.setText(R.string.cancel_friend_req);
 
                                     }
                                 });
@@ -221,7 +216,7 @@ public class ProfileActivity extends AppCompatActivity {
 
                                         send_request.setEnabled(true);
                                         current_state = "not_friends";
-                                        send_request.setText("SEND FRIEND REQUEST");
+                                        send_request.setText(R.string.send_friend_req);
 
                                     }
                                 });
@@ -264,7 +259,7 @@ public class ProfileActivity extends AppCompatActivity {
 
                                                         send_request.setEnabled(true);
                                                         current_state = "friends";
-                                                        send_request.setText("UNFRIEND");
+                                                        send_request.setText(R.string.unfriend);
 
                                                     }
                                                 });
@@ -300,7 +295,7 @@ public class ProfileActivity extends AppCompatActivity {
 
                                                     send_request.setEnabled(true);
                                                     current_state = "not_friends";
-                                                    send_request.setText("SEND FRIEND REQUEST");
+                                                    send_request.setText(R.string.send_friend_req);
 
                                                 }
                                             });

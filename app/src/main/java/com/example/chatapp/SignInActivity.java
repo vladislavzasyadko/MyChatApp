@@ -36,11 +36,6 @@ public class SignInActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-            Window window = getWindow();
-            window.addFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
-            //window.addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
-        }
         setContentView(R.layout.activity_sign_in);
 
         Button log_btn = findViewById(R.id.signInButton);
@@ -52,7 +47,7 @@ public class SignInActivity extends AppCompatActivity {
 
         sign_in_toolbar = (Toolbar) findViewById(R.id.sign_in_toolbar);
         setSupportActionBar(sign_in_toolbar);
-        getSupportActionBar().setTitle("Sign In");
+        getSupportActionBar().setTitle("Вход");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         sign_in_toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override

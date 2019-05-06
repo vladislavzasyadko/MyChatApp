@@ -5,12 +5,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".UsersActivity"
-    android:background="@drawable/bground">
+    android:background="@color/white">
 
     <android.support.design.widget.AppBarLayout
+        android:id="@+id/users_app_bar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="25dp">
+        android:layout_height="wrap_content">
 
         <include
             android:id="@+id/users_toolbar"
@@ -19,21 +19,11 @@
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/user_list"
+        android:layout_below="@+id/users_app_bar"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginStart="0dp"
-        android:layout_marginTop="81dp" />
+        android:layout_marginStart="0dp" />
 
-    <!--<android.support.v7.widget.RecyclerView
-        android:id="@+id/users_list"
-        android:layout_width="match_parent"
-        android:layout_height="651dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="80dp"
-        android:background="@color/colorPrimary" />-->
 
 
 </RelativeLayout>

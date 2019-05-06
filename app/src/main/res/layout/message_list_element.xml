@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/message_list_element"
+    android:layout_width="match_parent" android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:layout_margin="5dp"
+    android:elevation="5dp">
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/message_image"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        android:src="@mipmap/user2"
+        android:layout_margin="10dp"/>
+
+    <TextView
+        android:id="@+id/message_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="18sp"
+        android:paddingBottom="10dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginStart="69dp"
+        android:layout_marginEnd="10dp"
+        android:textColor="@color/darkTextColor"
+        android:text="hello, this is the message" />
+
+    <TextView
+        android:id="@+id/user_name_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="65dp"
+        android:textSize="22sp"
+        android:textColor="@color/darkTextColor"
+        android:text="TextView" />
+
+
+</RelativeLayout>

@@ -26,7 +26,8 @@
         android:layout_marginStart="115dp"
         android:layout_marginTop="10dp"
         android:text="username"
-        android:textSize="16sp" />
+        android:textSize="16sp"
+        android:textColor="@color/whiteTextColor"/>
 
     <TextView
         android:id="@+id/status_list"
@@ -36,7 +37,8 @@
         android:layout_alignParentTop="true"
         android:layout_marginStart="115dp"
         android:layout_marginTop="45dp"
-        android:text="user status" />
+        android:text="user status"
+        android:textColor="@color/whiteTextColor"/>
 
     <ImageView
         android:id="@+id/online_status"
